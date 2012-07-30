@@ -1,0 +1,148 @@
+\documentclass{beamer}
+\usetheme{_tuhs/tuhs}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{listings}
+\lstloadlanguages{Haskell}
+\lstnewenvironment{code}
+    {\lstset{}%
+      \csname lst@SetFirstLabel\endcsname}
+    {\csname lst@SaveFirstLabel\endcsname}
+    \lstset{
+      basicstyle=\small\ttfamily,
+      flexiblecolumns=false,
+      basewidth={0.5em,0.45em},
+      literate={+}{{$+$}}1 {/}{{$/$}}1 {*}{{$*$}}1 {=}{{$=$}}1
+               {>}{{$>$}}1 {<}{{$<$}}1 {\\}{{$\lambda$}}1
+               {\\\\}{{\char`\\\char`\\}}1
+               {->}{{$\rightarrow$}}2 {>=}{{$\geq$}}2 {<-}{{$\leftarrow$}}2
+               {<=}{{$\leq$}}2 {=>}{{$\Rightarrow$}}2 
+               {\ .}{{$\circ$}}2 {\ .\ }{{$\circ$}}2
+               {>>}{{>>}}2 {>>=}{{>>=}}2
+               {|}{{$\mid$}}1               
+    }
+
+
+\title{Haskell in the real World: \\ The IO monad}
+\author{Christoph ``Hammy`` Stahl}
+\begin{document}
+\begin{frame}
+	\maketitle
+\end{frame}
+\begin{frame}{Überblick}
+	\tableofcontents
+\end{frame}
+
+\section{Einleitung}
+\subsection{ghc / cabal install}
+\begin{frame}{ghc / cabal install}
+
+\end{frame}
+
+\subsection{hackage}
+\begin{frame}{hackage}[fragile]
+\begin{code}
+main :: IO ()
+main = putStrLn "Hey there"
+\end{code}
+\end{frame}
+
+\subsection{main}
+\begin{frame}{main}
+\end{frame}
+
+\section{stdin/stdout}
+\subsection{stdout}
+\begin{frame}{stdout}
+\end{frame}
+
+\subsection{stdin}
+\begin{frame}{stdin}
+\end{frame}
+
+\subsection{Beispiel: Hello World}
+\begin{frame}{Beispiel: Hello World}
+\end{frame}
+
+\subsection{Beispiel: Hello <User>}
+\begin{frame}{Beispiel: Hello <User>}
+\end{frame}
+
+\section{Datei Zugriff}
+\subsection{Bibliothek: System.IO}
+\begin{frame}{Bibliothek: System.IO}
+\end{frame}
+
+\subsection{Dateien öffnen}
+\begin{frame}{Dateien öffnen}
+\end{frame}
+
+\subsection{Dateien einlesen}
+\begin{frame}{Dateien einlesen}
+\end{frame}
+
+\subsection{Dateien schreiben}
+\begin{frame}{Dateien schreiben}
+\end{frame}
+
+\subsection{Beispiel: Verschlüsseler}
+\begin{frame}{Beispiel: Verschlüsseler}
+\end{frame}
+
+\section{Netzwerk}
+\subsection{Bibliothek: Network}
+\begin{frame}{Bibliothek: Network}
+\end{frame}
+
+\subsection{Server}
+\begin{frame}{Server}
+\end{frame}
+
+\subsection{Client}
+\begin{frame}{Client}
+\end{frame}
+
+\subsection{Beispiel: Einfacher Datei Transfer}
+\begin{frame}{Beispiel: Einfacher Datei Transfer}
+\end{frame}
+
+\section{Threading}
+\subsection{Bibliothek: Control.Concurrent}
+\begin{frame}{Bibliothek: Control.Concurrent}
+\end{frame}
+
+\subsection{Thread erstellen}
+\begin{frame}{Thread erstellen}
+\end{frame}
+
+\subsection{Gemeinsame Variablen}
+\begin{frame}{Gemeinsame Variablen}
+\end{frame}
+
+\subsubsection{IORef}
+\begin{frame}{IORef}
+\end{frame}
+
+\subsubsection{MVar}
+\begin{frame}{MVar}
+\end{frame}
+
+\subsection{Beispiel: Multithreaded Chat Server}
+\begin{frame}{Beispiel: Multithreaded Chat Server}
+\end{frame}
+
+\section{Coole Sachen}
+\begin{frame}{Coole Sachen}
+\begin{enumerate}
+\item getArgs
+\item cmdArgs
+\item ByteString
+\item Foreign Function Interface
+\end{enumerate}
+\end{frame}
+
+\end{document}

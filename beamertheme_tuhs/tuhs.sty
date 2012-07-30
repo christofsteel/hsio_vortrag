@@ -1,0 +1,92 @@
+% basic scheme
+\usetheme{Rochester}
+
+% let headline be one fifth of page height
+\beamer@headheight=0.20\paperheight
+
+% logos used in headline
+\RequirePackage{pgf}
+\pgfdeclareimage[width=\paperwidth]{header}{beamertheme_tuhs/header_new}
+
+% customize basic template
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercovered{transparent}
+
+% custom colors
+\definecolor{tugray}{HTML}{B2B3B6}
+\definecolor{tulightgray}{HTML}{eeeeee}
+\definecolor{tugreen}{HTML}{83B73D}
+\definecolor{tured}{HTML}{e5302d}
+
+% set color & font scheme
+\usecolortheme[named=tugreen]{structure}
+\usefonttheme{professionalfonts}
+
+% customize color settings
+\setbeamercolor*{Title bar}{fg=white,bg=tugray}
+\setbeamercolor*{Location bar}{fg=black,bg=white}
+\setbeamercolor*{block title}{bg=tugreen,fg=white}
+\setbeamercolor*{block body}{bg=tulightgray,fg=black}
+\setbeamercolor*{normal text}{bg=white,fg=black}
+\setbeamercolor*{section in head/foot}{bg=white,fg=black}
+\setbeamercolor*{title}{bg=tugray,fg=white}
+\setbeamercolor*{section in toc}{bg=white,fg=black}
+
+% customize font settings
+\setbeamerfont{section in head/foot}{size=\tiny,series=\normalfont}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+
+% dont show extra navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+%
+% template frametitle line
+% the gray backround is produced by the headline template
+%
+\setbeamertemplate{frametitle}
+{
+  \linethickness{0pt}
+  \vskip 0.1\baselineskip
+  \vskip 1pt
+  {\color{white}\usebeamerfont*{frametitle}\insertframetitle}
+}
+
+%
+% template headline, contains:
+% - logos
+% - green line
+% - gray background for frametitles
+%
+\setbeamertemplate{headline}
+{
+  \linethickness{0pt}
+  \vskip 0.75\beamer@headheight
+  {\color{tugreen}\rule{\paperwidth}{0.2pt}}
+  \vskip 0.2pt
+  \framelatex{
+   \begin{beamercolorbox}[wd=\paperwidth,ht=0.25\beamer@headheight,sep=0.1cm]{Title bar}
+    \mbox{}
+   \end{beamercolorbox}
+  }
+  \vskip -\beamer@headheight
+  \pgfuseimage{header}
+}
+
+
+%
+% template footline, contains:
+% - green line
+% - navigation bar
+% - page counter
+%
+\setbeamertemplate{footline}
+{
+  \linethickness{0pt}
+  {\color{tugreen}\rule{\paperwidth}{0.2pt}}
+  \framelatex{
+   \begin{beamercolorbox}[wd=\paperwidth,ht=0.2\beamer@headheight,sep=0.1cm]{Location bar}
+     \insertsectionnavigationhorizontal{0pt}{\hskip0.1cm}{} \hfill
+     \insertframenumber/\inserttotalframenumber
+   \end{beamercolorbox}
+  }
+}
