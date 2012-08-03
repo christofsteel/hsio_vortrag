@@ -1,31 +1,41 @@
 \documentclass{beamer}
 \usetheme{_tuhs/tuhs}
 \usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{ucs}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{enumerate}
 \usepackage{listings}
-\lstloadlanguages{Haskell}
-\lstnewenvironment{code}
-    {\lstset{}%
-      \csname lst@SetFirstLabel\endcsname}
-    {\csname lst@SaveFirstLabel\endcsname}
-    \lstset{
-      basicstyle=\small\ttfamily,
-      flexiblecolumns=false,
-      basewidth={0.5em,0.45em},
-      literate={+}{{$+$}}1 {/}{{$/$}}1 {*}{{$*$}}1 {=}{{$=$}}1
-               {>}{{$>$}}1 {<}{{$<$}}1 {\\}{{$\lambda$}}1
-               {\\\\}{{\char`\\\char`\\}}1
-               {->}{{$\rightarrow$}}2 {>=}{{$\geq$}}2 {<-}{{$\leftarrow$}}2
-               {<=}{{$\leq$}}2 {=>}{{$\Rightarrow$}}2 
-               {\ .}{{$\circ$}}2 {\ .\ }{{$\circ$}}2
-               {>>}{{>>}}2 {>>=}{{>>=}}2
-               {|}{{$\mid$}}1               
-    }
+\usepackage{multicol}
+\usepackage{xcolor}
 
+
+\lstnewenvironment{bash}
+{    
+    \lstset{language=bash}   
+}
+{
+}
+
+\lstnewenvironment{haskell}
+{
+	\lstset{language=haskell}
+}
+{
+}
+%
+%\newenvironment{haskell}[1]
+%{
+%    \begin{block}{Haskell: #1}
+%    \begin{lstlisting}
+%    \lstset{language=haskell}
+%}
+%{
+%    \end{lstlisting}
+%    \end{block}
+%}
 
 \title{Haskell in the real World: \\ The IO monad}
 \author{Christoph ``Hammy`` Stahl}
@@ -34,30 +44,99 @@
 	\maketitle
 \end{frame}
 \begin{frame}{Überblick}
-	\tableofcontents
+\begin{multicols}{2}
+\begin{tiny}
+\tableofcontents
+\end{tiny}
+\end{multicols}
 \end{frame}
 
 \section{Einleitung}
-\subsection{ghc / cabal install}
-\begin{frame}{ghc / cabal install}
-
+\subsection{Software}
+\begin{frame}[<+->]{Software}
+Software:
+\begin{itemize}
+\item Linux
+\item GHC
+\item cabal
+\item Download: \url{http://hackage.haskell.org/platform/}\\
+\item Oder aus dem eigenen Paketmanager.
+\end{itemize}
 \end{frame}
 
-\subsection{hackage}
-\begin{frame}{hackage}[fragile]
-\begin{code}
+\begin{frame}[<+->][fragile]{cabal}
+\begin{itemize}
+\item Cabal ist ein Paketmanager f\"ur Haskell
+\item Benutzt, um Bibliotheken und Programme zu installieren, und dabei automatisch Abh\"angigkeiten aufzul\"osen
+\item Teilweise m\"ussen entsprechende C Bibliotheken installiert sein.
+\item L\"ad die Programme und Abh\"angigkeiten aus dem \textcolor{blue}{\href{http://hackage.haskell.org}{Hackage}}
+\begin{block}{Shell:}
+\begin{bash}
+$ cabal install <paketname> 
+\end{bash} %$
+\end{block}
+\end{itemize}
+\end{frame}
+
+\subsection{Hackage}
+\begin{frame}{Hackage}
+\begin{itemize}
+\item Sammlung von Haskell Bibliotheken und Programmen
+\item Online Zugriff auf die Dokumentation der Bibliotheken
+\item Vergleichbar mit CPAN oder RubyGems
+\end{itemize}
+\end{frame}
+
+\subsection{Was ist die IO Monade}
+\begin{frame}[<+->]{Was ist die IO Monade}
+\begin{itemize}
+\item Kapselt IO Zugriff.
+\item Kommunikation mit der "Realen" Welt
+\item M\"oglichkeit das Programm zu steuern
+\item Potential f\"ur Kaputt /*TODO*/
+\end{itemize}
+\end{frame}
+
+\subsection{main-Funktion}
+\begin{frame}[<+->][fragile]{main-Funktion}
+\begin{itemize}
+\item Startpunkt eines jeden Haskell Programmes
+\begin{block}{Haskell:}
+\begin{haskell}
 main :: IO ()
-main = putStrLn "Hey there"
-\end{code}
-\end{frame}
-
-\subsection{main}
-\begin{frame}{main}
+\end{haskell}
+\end{block}
+\item Muss demnach ein \textbf{IO} () zurück geben
+\begin{block}{Beispiel:}
+\begin{haskell}
+main = do 
+  foo <- barIOfunction "text"
+  let stuff = map (pureFunction) foo
+  putStrLn stuff -- putStrLn :: IO ()
+\end{haskell}
+\end{block}
+\end{itemize}
 \end{frame}
 
 \section{stdin/stdout}
 \subsection{stdout}
-\begin{frame}{stdout}
+\begin{frame}[<+->][fragile]{stdout}
+\begin{itemize}
+\item 3 Standard Datenströme
+\begin{small}
+\begin{description}
+\item[stdin] Standardeingabe, meist Tastatur
+\item[stdout] Standardausgabe, meist Terminal
+\item[stderr] Standardausgabe für Fehler, meist Terminal
+\end{description}
+\end{small}
+\item Könnens in Dateien oder an andere Programme gelenkt werden.
+\begin{block}{Shell:}
+\begin{bash}
+$ prog1 < file | prog2 > file
+\end{bash} %$
+\end{block}
+\end{itemize}
 \end{frame}
 
 \subsection{stdin}
@@ -77,8 +156,8 @@ main = putStrLn "Hey there"
 \begin{frame}{Bibliothek: System.IO}
 \end{frame}
 
-\subsection{Dateien öffnen}
-\begin{frame}{Dateien öffnen}
+\subsection{Dateien \"offnen}
+\begin{frame}{Dateien \"offnen}
 \end{frame}
 
 \subsection{Dateien einlesen}
@@ -89,8 +168,8 @@ main = putStrLn "Hey there"
 \begin{frame}{Dateien schreiben}
 \end{frame}
 
-\subsection{Beispiel: Verschlüsseler}
-\begin{frame}{Beispiel: Verschlüsseler}
+\subsection{Beispiel: Verschl\"usseler}
+\begin{frame}{Beispiel: Verschl\"usseler}
 \end{frame}
 
 \section{Netzwerk}
@@ -123,11 +202,9 @@ main = putStrLn "Hey there"
 \begin{frame}{Gemeinsame Variablen}
 \end{frame}
 
-\subsubsection{IORef}
 \begin{frame}{IORef}
 \end{frame}
 
-\subsubsection{MVar}
 \begin{frame}{MVar}
 \end{frame}
 
