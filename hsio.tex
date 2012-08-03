@@ -11,6 +11,22 @@
 \usepackage{multicol}
 \usepackage{xcolor}
 
+\newcommand{\code}[2]
+{
+	\begin{block}{#1: #2}
+	\lstinputlisting[language=#1]{#2}
+	\end{block}
+}
+
+\newcommand{\outputcode}[3]
+{
+	\begin{block}{#1: #2}
+	\lstinputlisting[language=#1]{#2}
+	\begin{description}
+	\item[Ausgabe]\texttt{#3}
+	\end{description}
+	\end{block}
+}
 
 \lstnewenvironment{bash}
 {    
@@ -119,8 +135,7 @@ main = do
 \end{frame}
 
 \section{stdin/stdout}
-\subsection{stdout}
-\begin{frame}[<+->][fragile]{stdout}
+\begin{frame}[<+->][fragile]{stdin/stdout}
 \begin{itemize}
 \item 3 Standard Datenströme
 \begin{small}
@@ -139,21 +154,52 @@ $ prog1 < file | prog2 > file
 \end{itemize}
 \end{frame}
 
-\subsection{stdin}
-\begin{frame}{stdin}
+\subsection{stdout}
+\begin{frame}[<+->]{stdout}
+Wichtige Funktionen:
+\begin{description}
+\item[putStr] Schreibt einen String in die Ausgabe \\ \texttt{putStr :: String -> IO ()}
+\item[putStrLn] Schreibt einen String in die Ausgabe, gefolgt von einem Newline \\ \texttt{putStrLn :: String -> IO ()}
+\item[putChar] Schreibt einen Buchstaben in die Ausgabe \\ \texttt{putChar :: Char -> IO ()}
+\item[print] Schreibt eine Variable in die Ausgabe, gefolgt von einem Newline \\ \texttt{print :: Show a => a-> IO ()}
+\end{description}
 \end{frame}
 
-\subsection{Beispiel: Hello World}
-\begin{frame}{Beispiel: Hello World}
+\subsection{Beispiel: Hello World!}
+\begin{frame}[<+->][fragile]{Beispiel: Hello World!}
+\tiny
+\begin{columns}
+\column<0->{0.5\textwidth}
+\outputcode{Haskell}{HelloWorld1.hs}{Hello \\ World!}
+\outputcode{Haskell}{HelloWorld2.hs}{Hello World!}
+\column<0->{0.5\textwidth}
+\outputcode{Haskell}{Umstaendlich.hs}{Char!}
+\outputcode{Haskell}{Add.hs}{7}
+\end{columns}
 \end{frame}
+
+\subsection{stdin}
+\begin{frame}[<+->]{stdin}
+Wichtige Funktionen:
+\begin{description}
+\item[getLine] Liest eine Zeile von der Eingabe \\ \texttt{getLine :: IO String}
+\item[getChar] Liest ein Zeichen von der Eingabe \\ \texttt{getChar :: IO Char}
+\item[getContents] Liest alle Zeichen von der Eingabe \\ \texttt{getContents :: IO String}
+\item[readLn] Liest eine Zeile von der Eingabe und versucht das Ergebnis zu interpretieren \\ \texttt{readLn :: Read a => IO a}
+\end{description}
+\end{frame}
+
 
 \subsection{Beispiel: Hello <User>}
-\begin{frame}{Beispiel: Hello <User>}
+\begin{frame}[<+->][fragile]{Beispiel: Hello <User>}
+\outputcode{Haskell}{HelloUser.hs}{Name?\\ \textcolor{red}{Hammy}\\Hello Hammy}
 \end{frame}
 
 \section{Datei Zugriff}
 \subsection{Bibliothek: System.IO}
 \begin{frame}{Bibliothek: System.IO}
+\begin{itemize}
+\end{itemize}
 \end{frame}
 
 \subsection{Dateien \"offnen}
