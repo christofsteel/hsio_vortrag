@@ -195,19 +195,81 @@ Wichtige Funktionen:
 \outputcode{Haskell}{HelloUser.hs}{Name?\\ \textcolor{red}{Hammy}\\Hello Hammy}
 \end{frame}
 
-\section{Datei Zugriff}
+\section{Datenströme}
 \subsection{Bibliothek: System.IO}
 \begin{frame}{Bibliothek: System.IO}
 \begin{itemize}
+\item Standardbibliothek für IO in Haskell
+\item Prelude exportiert nur einige Funktionen aus System.IO
+\item Funktionen für Datei Zugriff
+\item Allgemeiner: Auf Handles zugreifen
 \end{itemize}
 \end{frame}
 
+\subsection{Handles}
+\begin{frame}[<+->]{Handles}
+Mit Handles kann man Datenströme verwalten
+\begin{itemize}
+\item Ein/Ausgabe
+\item Dateien lesen/schreiben
+\item In einen Netzwerkstrem schreiben/aus einem Netzwerkstrem lesen.
+%\item Eigene Datenströme für dir Kommunikation im Multithreading.
+\end{itemize}
+\end{frame}
+
+\subsection{Eigenschaften von Handles}
+\begin{frame}[<+->]{Eigenschaften von Handles}
+Ein Handle kann
+\begin{itemize}
+\item Eingabe(input), Ausgabe(output) oder Beides verwalten
+\item offen(open), geschlossen(closed) oder halbgeschlossen(semi-closed) sein
+\end{itemize}
+%\pause
+%stdin, stdout und stderr sind Handles.
+\end{frame}
+
+\subsection{Operationen auf Handles}
+\begin{frame}[<+->]{Operationen auf Handles}
+\begin{description}
+\item[hGetChar] Liest ein Zeichen von dem Handle \\ \texttt{hGetChar :: Handle -> IO Char}
+\item[hGetLine] Liest einen String von dem Handle (bis zum Newline) \\ \texttt{hGetLine :: Handle -> IO String}
+\item[hGetContents] Liest den Kompletten Handle aus \\ \texttt{hGetContents :: Handle -> IO String}
+\item[hPutChar] Schreibt ein Zeichen in einen Handle \\ \texttt{hPutChar :: Handle -> Char -> IO ()}
+\item[hPutStr] Schreibt einen String in einen Handle \\ \texttt{hPutStr :: Handle -> String -> IO ()}
+\item[hPutStrLn] Schreibt einen String und ein Newline in einen Handle\\ \texttt{hPutStrLn :: Handle -> String -> IO ()}
+\item[hClose] Schließt einen Handle. \\ \texttt{hClose :: Handle -> IO ()}
+\end{description}
+\end{frame}
+
+\subsection{Datenstr\"ome sind Datenstr\"ome}
+\begin{frame}[<+->]{Datenstr\"ome sind Datenstr\"ome}
+\center
+Operationen klingen vertraut?\\
+\pause
+stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
+\end{frame}
+
+\begin{frame}[fragile]{Auszug aus System.IO}
+\tiny
+\code{Haskell}{AuszugAusSystemIO.hs}
+\end{frame}
+
+\section{Datei Zugriff}
 \subsection{Dateien \"offnen}
 \begin{frame}{Dateien \"offnen}
+\begin{description}
+\item[openFile] Öffnet eine Datei zum Lesen/Schreiben oder Erweitern \\ \texttt{\small openFile :: FilePath -> IOMode -> IO Handle}
+\item[FilePath] \texttt{type FilePath = String}
+\item[IOMode] \texttt{data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode}
+\end{description}
 \end{frame}
 
 \subsection{Dateien einlesen}
 \begin{frame}{Dateien einlesen}
+\begin{description}
+\item[readFile] Liest eine Datei ein \\ 
+\texttt{readFile :: FilePath -> IO String}
+\end{description}
 \end{frame}
 
 \subsection{Dateien schreiben}
