@@ -75,7 +75,7 @@ Software:
 \item Linux
 \item GHC
 \item cabal
-\item Download: \url{http://hackage.haskell.org/platform/}\\
+\item Download: \textcolor{blue}{\url{http://hackage.haskell.org/platform/}}\\
 \item Oder aus dem eigenen Paketmanager.
 \end{itemize}
 \end{frame}
@@ -83,9 +83,9 @@ Software:
 \begin{frame}[<+->][fragile]{cabal}
 \begin{itemize}
 \item Cabal ist ein Paketmanager f\"ur Haskell
-\item Benutzt, um Bibliotheken und Programme zu installieren, und dabei automatisch Abh\"angigkeiten aufzul\"osen
+\item Benutzt, um Bibliotheken und Programme zu installieren, und dabei automatisch Abh\"angigkeiten aufzul\"osen,
 \item Teilweise m\"ussen entsprechende C Bibliotheken installiert sein.
-\item L\"ad die Programme und Abh\"angigkeiten aus dem \textcolor{blue}{\href{http://hackage.haskell.org}{Hackage}}
+\item L\"ad die Programme und Abh\"angigkeiten aus dem \textcolor{blue}{\href{http://hackage.haskell.org}{Hackage}}.
 \begin{block}{Shell:}
 \begin{bash}
 $ cabal install <paketname> 
@@ -95,11 +95,11 @@ $ cabal install <paketname>
 \end{frame}
 
 \subsection{Hackage}
-\begin{frame}{Hackage}
+\begin{frame}[<+->]{Hackage}
 \begin{itemize}
-\item Sammlung von Haskell Bibliotheken und Programmen
-\item Online Zugriff auf die Dokumentation der Bibliotheken
-\item Vergleichbar mit CPAN oder RubyGems
+\item Sammlung von Haskell Bibliotheken und Programmen.
+\item Online Zugriff auf die Dokumentation der Bibliotheken.
+\item Vergleichbar mit CPAN oder RubyGems.
 \end{itemize}
 \end{frame}
 
@@ -107,22 +107,22 @@ $ cabal install <paketname>
 \begin{frame}[<+->]{Was ist die IO Monade}
 \begin{itemize}
 \item Kapselt IO Zugriff.
-\item Kommunikation mit der "Realen" Welt
-\item M\"oglichkeit das Programm zu steuern
-\item Potential f\"ur Kaputt /*TODO*/
+\item Kommunikation mit der "Realen" Welt.
+\item M\"oglichkeit das Programm zu steuern.
+\item Potential f\"ur Seiteneffekte.
 \end{itemize}
 \end{frame}
 
 \subsection{main-Funktion}
 \begin{frame}[<+->][fragile]{main-Funktion}
 \begin{itemize}
-\item Startpunkt eines jeden Haskell Programmes
+\item Startpunkt eines jeden Haskell Programmes.
 \begin{block}{Haskell:}
 \begin{haskell}
 main :: IO ()
 \end{haskell}
 \end{block}
-\item Muss demnach ein \textbf{IO} () zurück geben
+\item Muss demnach ein \textbf{IO} () zurück geben.
 \begin{block}{Beispiel:}
 \begin{haskell}
 main = do 
@@ -137,18 +137,18 @@ main = do
 \section{stdin/stdout}
 \begin{frame}[<+->][fragile]{stdin/stdout}
 \begin{itemize}
-\item 3 Standard Datenströme
+\item Jedes Programm hat 3 standard Datenströme
 \begin{small}
 \begin{description}
-\item[stdin] Standardeingabe, meist Tastatur
-\item[stdout] Standardausgabe, meist Terminal
-\item[stderr] Standardausgabe für Fehler, meist Terminal
+\item[stdin] Standardeingabe, meist Tastatur.
+\item[stdout] Standardausgabe, meist Terminal.
+\item[stderr] Standardausgabe für Fehler, meist Terminal.
 \end{description}
 \end{small}
-\item Könnens in Dateien oder an andere Programme gelenkt werden.
+\item Können in Dateien oder an andere Programme gelenkt werden.
 \begin{block}{Shell:}
 \begin{bash}
-$ prog1 < file | prog2 > file
+$ prog1 < file | prog2 > file 2> error.log
 \end{bash} %$
 \end{block}
 \end{itemize}
@@ -158,10 +158,10 @@ $ prog1 < file | prog2 > file
 \begin{frame}[<+->]{stdout}
 Wichtige Funktionen:
 \begin{description}
-\item[putStr] Schreibt einen String in die Ausgabe \\ \texttt{putStr :: String -> IO ()}
-\item[putStrLn] Schreibt einen String in die Ausgabe, gefolgt von einem Newline \\ \texttt{putStrLn :: String -> IO ()}
-\item[putChar] Schreibt einen Buchstaben in die Ausgabe \\ \texttt{putChar :: Char -> IO ()}
-\item[print] Schreibt eine Variable in die Ausgabe, gefolgt von einem Newline \\ \texttt{print :: Show a => a-> IO ()}
+\item[putStr] Schreibt einen String in die Ausgabe. \\ \texttt{putStr :: String -> IO ()}
+\item[putStrLn] Schreibt einen String in die Ausgabe, gefolgt von einem Newline. \\ \texttt{putStrLn :: String -> IO ()}
+\item[putChar] Schreibt einen Buchstaben in die Ausgabe. \\ \texttt{putChar :: Char -> IO ()}
+\item[print] Schreibt eine Variable in die Ausgabe, gefolgt von einem Newline. \\ \texttt{print :: Show a => a-> IO ()}
 \end{description}
 \end{frame}
 
@@ -182,10 +182,12 @@ Wichtige Funktionen:
 \begin{frame}[<+->]{stdin}
 Wichtige Funktionen:
 \begin{description}
-\item[getLine] Liest eine Zeile von der Eingabe \\ \texttt{getLine :: IO String}
-\item[getChar] Liest ein Zeichen von der Eingabe \\ \texttt{getChar :: IO Char}
-\item[getContents] Liest alle Zeichen von der Eingabe \\ \texttt{getContents :: IO String}
-\item[readLn] Liest eine Zeile von der Eingabe und versucht das Ergebnis zu interpretieren \\ \texttt{readLn :: Read a => IO a}
+\item[getLine] Liest eine Zeile von der Eingabe. \\ \texttt{getLine :: IO String}
+\item[getChar] Liest ein Zeichen von der Eingabe. \\ \texttt{getChar :: IO Char}
+\item[readLn] Liest eine Zeile von der Eingabe und versucht das Ergebnis zu interpretieren. \\ \texttt{readLn :: Read a => IO a}
+\item Die Funktionen warten, bis Zeichen vorhanden sind.
+\item[getContents] Liest alle Zeichen von der Eingabe. \textcolor{red}{(lazy)}\\ \texttt{getContents :: IO String}
+\item Programmfluss geht weiter, bis auf die Eingabe zugegriffen wird.
 \end{description}
 \end{frame}
 
@@ -212,7 +214,7 @@ Mit Handles kann man Datenströme verwalten
 \begin{itemize}
 \item Ein/Ausgabe
 \item Dateien lesen/schreiben
-\item In einen Netzwerkstrem schreiben/aus einem Netzwerkstrem lesen.
+\item In einen Netzwerkstream schreiben/aus einem Netzwerkstream lesen.
 %\item Eigene Datenströme für dir Kommunikation im Multithreading.
 \end{itemize}
 \end{frame}
@@ -256,37 +258,76 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 
 \section{Datei Zugriff}
 \subsection{Dateien \"offnen}
-\begin{frame}{Dateien \"offnen}
+\begin{frame}[<+->]{Dateien \"offnen}
 \begin{description}
 \item[openFile] Öffnet eine Datei zum Lesen/Schreiben oder Erweitern \\ \texttt{\small openFile :: FilePath -> IOMode -> IO Handle}
 \item[FilePath] \texttt{type FilePath = String}
 \item[IOMode] \texttt{data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode}
+\item[withFileDo]TEst123
 \end{description}
 \end{frame}
 
 \subsection{Dateien einlesen}
 \begin{frame}{Dateien einlesen}
 \begin{description}
-\item[readFile] Liest eine Datei ein \\ 
-\texttt{readFile :: FilePath -> IO String}
+\item[readFile] Liest eine Datei ein \\ \texttt{readFile :: FilePath -> IO String}
 \end{description}
+\begin{itemize}
+\item Liest die Datei mit \texttt{hGetContents} ein.
+\item Datei wird Lazy gelesen.
+\item Bis die Datei vollständig gelesen worden ist, ist der Handle in einem semiclosed Zustand
+\item Gibt Probleme, wenn man mehrfach in eine Datei schreiben und aus einer Datei Lesen möchte
+\end{itemize}
 \end{frame}
 
 \subsection{Dateien schreiben}
 \begin{frame}{Dateien schreiben}
+\begin{description}
+\item[writeFile] Schreibt einen String in einer Datei \\ \texttt{writeFile :: FilePath -> String -> IO ()}
+\item Überschreibt den gesamten Inhalt der Datei
+\end{description}
 \end{frame}
 
 \subsection{Beispiel: Verschl\"usseler}
 \begin{frame}{Beispiel: Verschl\"usseler}
+\tiny
+\code{Haskell}{hscrypt.hs}
 \end{frame}
 
 \section{Netzwerk}
 \subsection{Bibliothek: Network}
 \begin{frame}{Bibliothek: Network}
+\begin{itemize}
+\item Hochleveliger Zugriff auf Netzwerkfunktionen
+\item Bietet auch einen Lowleveligen Zugriff mit \texttt{Network.Socket}
+\item Netwerkströme werden als Handles aufgefasst
+\item \textcolor{red}{Windows only} Benötigt \texttt{withSocketsDo :: IO a -> IO a}
+\end{itemize}
+\end{frame}
+
+\subsection{Datentypen}
+\begin{frame}{Datentypen}
+\begin{description}
+\item[PortID] \begin{itemize}
+\item Ein Servicename: \texttt{Service String} \\ \textit{Bsp.: Service "ftp"}
+\item Eine Portnummer: \texttt{PortNumber PortNumber} \\ \textit{Bsp.: PortNumber 1337}
+\item \textcolor{green}{Unix only} Ein Unix Socket: \texttt{UnixSocket String} \\ \textit{UnixSocket "/home/hammy/theSocket"}
+\end{itemize}
+\item[HostName]
+\begin{itemize}
+\item Ein Hostname \textit{Bsp.: "haskell.org"}
+\item Eine IPv4 Adresse \textit{Bsp.: "78.46.100.180"}
+\item Eine IPv6 Adresse \textit{Bsp.: "2a01:4f8:121:6::10"}
+\end{itemize}
+\end{description}
 \end{frame}
 
 \subsection{Server}
 \begin{frame}{Server}
+\begin{description}
+\item[listenOn] Öffnet einen Socket auf einem Port, und lauscht \\ \texttt{listenOn :: PortID -> IO Socket}
+\item[accept] Wartet auf Connections auf einem Socket, und gibt einen Handle für diese Verbindung \\ \texttt{accept :: }
+\end{description}
 \end{frame}
 
 \subsection{Client}
