@@ -263,7 +263,7 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 \item[openFile] Öffnet eine Datei zum Lesen/Schreiben oder Erweitern \\ \texttt{\small openFile :: FilePath -> IOMode -> IO Handle}
 \item[FilePath] \texttt{type FilePath = String}
 \item[IOMode] \texttt{data IOMode = ReadMode | WriteMode | AppendMode | ReadWriteMode}
-\item[withFileDo]TEst123
+%\item[withFileDo]
 \end{description}
 \end{frame}
 
@@ -326,12 +326,16 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 \begin{frame}{Server}
 \begin{description}
 \item[listenOn] Öffnet einen Socket auf einem Port, und lauscht \\ \texttt{listenOn :: PortID -> IO Socket}
-\item[accept] Wartet auf Connections auf einem Socket, und gibt einen Handle für diese Verbindung \\ \texttt{accept :: }
+\item[accept] Wartet auf Connections auf einem Socket, und gibt einen Handle für diese Verbindung \\ \texttt{accept :: Socket -> IO (Handle, HostName, PortNumber)}
+\item[sClose] Schließt einen übergebenen Socket \\ \texttt{sclose :: Socket -> IO ()}
 \end{description}
 \end{frame}
 
 \subsection{Client}
 \begin{frame}{Client}
+\begin{description}
+\item[connectTo] Verbindet sich zu einem Port auf einem Rechner \\ \texttt{connectTo :: HostName -> PortID -> IO Handle}
+\end{description}
 \end{frame}
 
 \subsection{Beispiel: Einfacher Datei Transfer}
@@ -340,21 +344,66 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 
 \section{Threading}
 \subsection{Bibliothek: Control.Concurrent}
-\begin{frame}{Bibliothek: Control.Concurrent}
+\begin{frame}[<+->]{Bibliothek: Control.Concurrent}
+Enthält Funktionen und Datentypen für:
+\begin{itemize}
+\item Nebenläufigkeit
+\item Synchronisation
+\item "Globale Variablen"
+\item Scheduling
+\end{itemize}
 \end{frame}
 
 \subsection{Thread erstellen}
-\begin{frame}{Thread erstellen}
+\begin{frame}[<+->][fragile]{Thread erstellen}
+\begin{description}
+\item[forkIO] \begin{itemize}
+\item Lässt eine übergebene Funktion in einem eigenen Thread laufen \\ \texttt{forkIO :: IO () -> IO ThreadId}
+\item Sobald der Hauptthread beendet wird, wird das komplette Programm beendet.
+\end{itemize}
+\end{description}
+\tiny
+\code{Haskell}{forkIO.hs}
 \end{frame}
 
 \subsection{Gemeinsame Variablen}
-\begin{frame}{Gemeinsame Variablen}
+\begin{frame}[<+->]{Gemeinsame Variablen}
+\begin{itemize}
+\item Kommunikation zwischen Threads
+\item Kommunikation innerhalb eines Threads
+\item "Globale Variablen"
+\item Locking
+\end{itemize}
 \end{frame}
 
-\begin{frame}{IORef}
+\begin{frame}[<+->]{IORef}
+Definiert in \texttt{Data.IORef}
+\begin{description}
+\item[newIORef] Gibt zu einer Variable die Referenz \\
+\texttt{newIORef :: a -> IO (IORef a)}
+\item[readIORef] Liest aus einer Referenz den Inhalt aus\\ \texttt{readIORef :: IORef a -> IO a}
+\item[writeIORef] Schreibt in eine Referenz \\ \texttt{writeIORef :: IORef a -> a -> IO ()}
+\item[modifyIORef] Wendet eine Funktion auf den Inhalt einer Referenz an \\ \texttt{modifyIORef :: IORef a -> (a -> a) -> IO ()}
+\end{description}
 \end{frame}
 
-\begin{frame}{MVar}
+\begin{frame}[fragile]{Beispiel IORef}
+\tiny
+\code{Haskell}{IORef.hs}
+\end{frame}
+
+\begin{frame}[<+->]{MVar}
+\begin{itemize}
+\item Vorteil gegenüber IORefs: Atomares Lesen und Schreiben
+\end{itemize}
+\begin{description}
+\item[newMVar] Erstellt aus einer Variable eine MVar \\ \texttt{newMVar :: a -> IO (MVar a)}
+\item[takeMVar] Nimmt den Wert aus einer MVar und leert die MVar. Falls die MVar schon leer war, blockiert der Thread. \\ \texttt{takeMVar :: MVar a -> IO a}
+\item[putMVar] Schreibt einen Wert in eine leere MVar. Falls die MVar nicht leer ist, blockiert der Thread. \\
+\texttt{putMVar :: MVar a -> a -> IO ()}
+\item[readMVar] Kombination aus takeMVar und putMVar \\ \texttt{readMVar :: MVar a -> IO a}
+\item[swapMVar] Tauscht atomar den Wert in der MVar aus. \\ \texttt{swapMVar :: MVar a -> a -> IO a}
+\end{description}
 \end{frame}
 
 \subsection{Beispiel: Multithreaded Chat Server}
