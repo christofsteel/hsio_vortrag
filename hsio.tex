@@ -268,7 +268,7 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 \end{frame}
 
 \subsection{Dateien einlesen}
-\begin{frame}{Dateien einlesen}
+\begin{frame}[<+->]{Dateien einlesen}
 \begin{description}
 \item[readFile] Liest eine Datei ein \\ \texttt{readFile :: FilePath -> IO String}
 \end{description}
@@ -281,7 +281,7 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 \end{frame}
 
 \subsection{Dateien schreiben}
-\begin{frame}{Dateien schreiben}
+\begin{frame}[<+->]{Dateien schreiben}
 \begin{description}
 \item[writeFile] Schreibt einen String in einer Datei \\ \texttt{writeFile :: FilePath -> String -> IO ()}
 \item Überschreibt den gesamten Inhalt der Datei
@@ -296,7 +296,7 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 
 \section{Netzwerk}
 \subsection{Bibliothek: Network}
-\begin{frame}{Bibliothek: Network}
+\begin{frame}[<+->]{Bibliothek: Network}
 \begin{itemize}
 \item Hochleveliger Zugriff auf Netzwerkfunktionen
 \item Bietet auch einen Lowleveligen Zugriff mit \texttt{Network.Socket}
@@ -306,7 +306,7 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 \end{frame}
 
 \subsection{Datentypen}
-\begin{frame}{Datentypen}
+\begin{frame}[<+->]{Datentypen}
 \begin{description}
 \item[PortID] \begin{itemize}
 \item Ein Servicename: \texttt{Service String} \\ \textit{Bsp.: Service "ftp"}
@@ -323,7 +323,7 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 \end{frame}
 
 \subsection{Server}
-\begin{frame}{Server}
+\begin{frame}[<+->]{Server}
 \begin{description}
 \item[listenOn] Öffnet einen Socket auf einem Port, und lauscht \\ \texttt{listenOn :: PortID -> IO Socket}
 \item[accept] Wartet auf Connections auf einem Socket, und gibt einen Handle für diese Verbindung \\ \texttt{accept :: Socket -> IO (Handle, HostName, PortNumber)}
@@ -339,7 +339,14 @@ stdin, stdout und stderr sind Handles (Definiert in System.IO)\\
 \end{frame}
 
 \subsection{Beispiel: Einfacher Datei Transfer}
-\begin{frame}{Beispiel: Einfacher Datei Transfer}
+\begin{frame}{Beispiel: Einfacher Datei Transfer (Client)}
+\tiny
+\code{Haskell}{hsnclient.hs}
+\end{frame}
+
+\begin{frame}{Beispiel: Einfacher Datei Transfer (Server)}
+\tiny
+\code{Haskell}{hsnserver.hs}
 \end{frame}
 
 \section{Threading}
@@ -407,17 +414,23 @@ Definiert in \texttt{Data.IORef}
 \end{frame}
 
 \subsection{Beispiel: Multithreaded Chat Server}
-\begin{frame}{Beispiel: Multithreaded Chat Server}
+\begin{frame}{Beispiel: Multithreaded Chat (Client)}
+\tiny
+\code{Haskell}{hschatclient.hs}
+\end{frame}
+\begin{frame}{Beispiel: Multithreaded Chat (Server) }
+\tiny
+\code{Haskell}{hschatserver.hs}
 \end{frame}
 
 \section{Coole Sachen}
-\begin{frame}{Coole Sachen}
-\begin{enumerate}
-\item getArgs
-\item cmdArgs
-\item ByteString
-\item Foreign Function Interface
-\end{enumerate}
+\begin{frame}[<+->]{Coole Sachen}
+\begin{description}
+\item[getArgs] Holt Parameter des Programmaufrufs \\ \texttt{getArgs :: IO [String]}
+\item[cmdArgs] Alternative zu getArgs, parst gleichzeitig auch die Parameter
+\item[ByteString] Schnellere Implementierung von Strings, basierend auf Arrays
+\item[Foreign Function Interface] Ansteuerung von C Funktionen in Haskell
+\end{description}
 \end{frame}
 
 \end{document}
